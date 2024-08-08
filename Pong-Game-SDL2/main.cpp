@@ -4,7 +4,7 @@
 #include "main.h"
 #include "SDL.h"
 
-int main(int argsc, char* argv[])
+int main(int argc, char* argv[])
 {
 	std::cout << "Hello CMake." << std::endl;
     
