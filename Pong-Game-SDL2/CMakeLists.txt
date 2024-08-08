@@ -26,10 +26,11 @@ endif()
 
 # TODO: Add tests and install targets if needed.
 
-# Custom command to copy the SDL2.dll file after build
+# Custom command to copy the SDL2.dll or SDL2d.dll file after build
 add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2d.dll"
-  $<TARGET_FILE_DIR:Pong-Game-SDL2>
-  COMMENT "Copying SDL2.dll to target directory"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        $<$<CONFIG:Debug>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2d.dll>
+        $<$<CONFIG:Release>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2.dll>
+        $<TARGET_FILE_DIR:Pong-Game-SDL2>
+    COMMENT "Copying SDL2.dll or SDL2d.dll to target directory based on build configuration"
 )
