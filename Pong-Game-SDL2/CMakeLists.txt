@@ -1,36 +1,46 @@
-﻿# CMakeLists.txt : CMake project for Pong-Game-SDL2, include source and define
-# project specific logic here.
-#
+﻿cmake_minimum_required(VERSION 3.14)
 
-include(FetchContent)
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Fetch SDL2
-FetchContent_Declare(
-	SDL2
-	GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-	GIT_TAG	release-2.30.6
-	GIT_PROGRESS TRUE
-	GIT_SHALLOW TRUE
-)
+# Create the executable for your project
+add_executable(Pong-Game-SDL2 main.cpp)
 
-FetchContent_MakeAvailable(SDL2)
+# Find pre-installed SDL2 in CMAKE_PREFIX_PATH
+find_package(SDL2 QUIET)
+if(SDL2_FOUND)
+    message(STATUS "Using SDL2 via find_package")
 
-# Add source to this project's executable.
-add_executable (Pong-Game-SDL2 "main.cpp" "main.h")
-
-target_link_libraries(Pong-Game-SDL2 SDL2::SDL2 SDL2::SDL2main)
-
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Pong-Game-SDL2 PROPERTY CXX_STANDARD 20)
+    add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${SDL2_LIBDIR}/SDL2.dll"
+            $<TARGET_FILE_DIR:Pong-Game-SDL2>
+        COMMENT "Copying SDL2.dll to target directory"
+    )
 endif()
 
-# TODO: Add tests and install targets if needed.
+if(NOT SDL2_FOUND)
+    # Add SDL2 as an external project
+    include(FetchContent)
+    FetchContent_Declare(
+      SDL2
+      GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+      GIT_TAG release-2.30.6  # Use the latest stable tag or branch
+    )
 
-# Custom command to copy the SDL2.dll or SDL2d.dll file after build
-add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<$<CONFIG:Debug>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2d.dll>
-        $<$<CONFIG:Release>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2.dll>
-        $<TARGET_FILE_DIR:Pong-Game-SDL2>
-    COMMENT "Copying SDL2.dll or SDL2d.dll to target directory based on build configuration"
-)
+    # Build SDL2
+    FetchContent_MakeAvailable(SDL2)
+
+    # Custom command to copy the SDL2.dll or SDL2d.dll file after build
+    add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<$<CONFIG:Debug>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2d.dll>
+            $<$<CONFIG:Release>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2.dll>
+            $<TARGET_FILE_DIR:Pong-Game-SDL2>
+        COMMENT "Copying SDL2.dll or SDL2d.dll to target directory based on build configuration"
+    )
+endif()
+
+# Link your project with SDL2main first, then SDL2
+target_link_libraries(Pong-Game-SDL2 PRIVATE SDL2::SDL2main SDL2::SDL2)
