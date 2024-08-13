@@ -11,13 +11,6 @@ add_executable(Pong-Game-SDL2 main.cpp)
 find_package(SDL2 QUIET)
 if(SDL2_FOUND)
     message(STATUS "Using SDL2 via find_package")
-
-    add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${SDL2_LIBDIR}/SDL2.dll"
-            $<TARGET_FILE_DIR:Pong-Game-SDL2>
-        COMMENT "Copying SDL2.dll to target directory"
-    )
 endif()
 
 if(NOT SDL2_FOUND)
@@ -31,16 +24,13 @@ if(NOT SDL2_FOUND)
 
     # Build SDL2
     FetchContent_MakeAvailable(SDL2)
-
-    # Custom command to copy the SDL2.dll or SDL2d.dll file after build
-    add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            $<$<CONFIG:Debug>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2d.dll>
-            $<$<CONFIG:Release>:${CMAKE_BINARY_DIR}/_deps/sdl2-build/SDL2.dll>
-            $<TARGET_FILE_DIR:Pong-Game-SDL2>
-        COMMENT "Copying SDL2.dll or SDL2d.dll to target directory based on build configuration"
-    )
 endif()
 
 # Link your project with SDL2main first, then SDL2
 target_link_libraries(Pong-Game-SDL2 PRIVATE SDL2::SDL2main SDL2::SDL2)
+
+# Copy SDL2 DLLs to the output directory
+add_custom_command(TARGET Pong-Game-SDL2 POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_RUNTIME_DLLS:Pong-Game-SDL2> $<TARGET_FILE_DIR:Pong-Game-SDL2>
+    COMMAND_EXPAND_LISTS
+)
