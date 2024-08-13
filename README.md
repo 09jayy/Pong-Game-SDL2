@@ -15,7 +15,7 @@
 
 ```sh
 mkdir build
-cmake .. -G Ninja --DCMAKE_BUILD_TYPE=Debug
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Debug
 ninja
 ```
 
@@ -23,6 +23,6 @@ ninja
 
 ```sh
 mkdir build
-cmake .. -G Ninja --DCMAKE_BUILD_TYPE=Release
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
 ninja
 ```
