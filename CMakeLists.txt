@@ -12,4 +12,4 @@ endif()
 project ("Pong-Game-SDL2")
 
 # Include sub-projects.
-add_subdirectory ("Pong-Game-SDL2")
+add_subdirectory ("src")
