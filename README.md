@@ -2,6 +2,21 @@
 
 # Configure and Build with CMake
 
+Prerequisites:
+
+- Git
+- CMake
+- C++ compiler
+
+First, clone the repository
+
+```sh
+git clone https://github.com/09jayy/Pong-Game-SDL2
+cd Pong-Game-SDL2
+```
+
+Note: The CMakeLists.txt will first use `find_package(SDL2 QUIET)` to locate SDL2 dependencies before attempting to download the SDL2 repository
+
 ## Open in Visual Studio as CMake Project
 
 1. In Visual Studio: File > Open > CMake.. > "Pong-Game-SDL2/CMakeLists.txt"
