@@ -31,6 +31,7 @@ Note: The CMakeLists.txt will first use `find_package(SDL2 QUIET)` to locate SDL
 
 ```sh
 mkdir build
+cd build
 cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Debug
 ninja
 ```
@@ -39,6 +40,7 @@ ninja
 
 ```sh
 mkdir build
+cd build
 cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
 ninja
 ```
@@ -49,6 +51,7 @@ ninja
 
 ```sh
 mkdir build
+cd build
 cmake .. -G "Visual Studio 17" -DCMAKE_BUILD_TYPE=Debug
 msbuild Pong-Game-SDL2.sln
 ```
@@ -57,6 +60,7 @@ msbuild Pong-Game-SDL2.sln
 
 ```sh
 mkdir build
+cd build
 cmake .. -G "Visual Studio 17" -DCMAKE_BUILD_TYPE=Release
 msbuild Pong-Game-SDL2.sln
 ```
