@@ -15,9 +15,11 @@ git clone https://github.com/09jayy/Pong-Game-SDL2
 cd Pong-Game-SDL2
 ```
 
-Note: The CMakeLists.txt will first use `find_package(SDL2 QUIET)` to locate SDL2 dependencies before attempting to download the SDL2 repository
+Note: The CMakeLists.txt will first use `find_package()` to locate dependencies (SDL2, SDL_ttf)before attempting to download the respective repository from github
 
-## Open in Visual Studio as CMake Project
+> If you are not using a package manager or run into errors in configuration try add cmake flag `-DSDL2TTF_VENDORED=ON` into `cmake` configure command
+
+## Open in Visual Studio as CMake Project (Recommended)
 
 1. In Visual Studio: File > Open > CMake.. > "Pong-Game-SDL2/CMakeLists.txt"
 1. Select configuration (e.g. x64-Debug, x64-Release)
