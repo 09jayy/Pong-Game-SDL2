@@ -2,15 +2,8 @@
 #include "SDL.h"
 #include "Game.hpp" 
 
-SDL_Renderer* Game::renderer = nullptr; 
-
-Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) : backgroundColor({ 0,0,0,255 }), running(true), window(nullptr), renderer(nullptr)
 {
-	running = true;
-	window = nullptr;
-	hasFailed = false;
-	renderer = nullptr; 
-
 	int flags = 0;
 
 	if (fullscreen) 
@@ -31,7 +24,7 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer) 
 		{
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+			SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
 			std::cout << "Renderer created" << "\n";
 		}
 
@@ -83,9 +76,4 @@ void Game::clean()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	std::cout << "Game Cleaned" << std::endl;
-}
-
-void Game::fail()
-{
-	hasFailed = true; 
 }

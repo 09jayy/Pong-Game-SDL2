@@ -6,8 +6,8 @@ class Game
 private:
 	bool running;
 	SDL_Window* window;
-	static SDL_Renderer* renderer;
-	bool hasFailed;
+	SDL_Renderer* renderer;
+	const SDL_Color backgroundColor;
 
 public:
 	Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
@@ -17,9 +17,9 @@ public:
 	void update();
 	void render();
 	void clean();
-	void fail();
 
 	bool isRunning() { return running; };
 
-	static SDL_Renderer* getRenderer() { return renderer; };
+	SDL_Renderer* getRenderer() { return renderer; };
+	const SDL_Color& getBackgroundColor() const { return backgroundColor; };
 };

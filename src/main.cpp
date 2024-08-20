@@ -6,13 +6,14 @@
 
 int main(int argc, char* argv[])
 {
-    
+    const int GAME_WIDTH = 1280;
+    const int GAME_HEIGHT = 720;
     const int FPS = 30;
 
     Uint32 elapsed = 0;
     int frameTime = 0;
 
-    Game game("Pong Game by Jay", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, false);
+    Game game("Pong Game by Jay", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GAME_WIDTH, GAME_HEIGHT, false);
 
     while (game.isRunning()) 
     {
