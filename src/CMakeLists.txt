@@ -20,8 +20,6 @@ endif()
 if(NOT SDL2_FOUND)
     message(STATUS "Using SDL2 via Github.com")
 
-    # Add SDL2 as an external project
-    include(FetchContent)
     FetchContent_Declare(
       SDL2
       GIT_REPOSITORY https://github.com/libsdl-org/SDL.git

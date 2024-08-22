@@ -24,7 +24,6 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer) 
 		{
-			SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
 			std::cout << "Renderer created" << "\n";
 		}
 
@@ -61,6 +60,9 @@ void Game::update()
 
 void Game::render()
 {
+	// Set draw color to render background first
+	SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+
 	// Clear renderer buffer
 	SDL_RenderClear(renderer);
 
