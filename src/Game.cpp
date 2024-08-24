@@ -1,39 +1,44 @@
 #include <iostream>
 #include "SDL.h"
 #include "Game.hpp" 
+#include "PaddleRenderer.hpp"
 
-Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) : backgroundColor({ 0,0,0,255 }), running(true), window(nullptr), renderer(nullptr)
+Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+	: backgroundColor({ 0,0,0,255 }), running(true), window(nullptr), renderer(nullptr)
 {
 	int flags = 0;
 
-	if (fullscreen) 
+	if (fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) 
+	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "GAME INITIALISED" << "\n";
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-		if (window) 
+		if (window)
 		{
 			std::cout << "Window Created" << "\n";
 		}
 
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if (renderer) 
+		if (renderer)
 		{
 			std::cout << "Renderer created" << "\n";
 		}
 
 		running = true;
+
+		sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
+		paddle1 = Paddle(640, 360, 20, 20, sharedPaddleRenderer);
 	}
-	else 
+	else
 	{
 		running = false;
 	}
-} 
+};
 
 Game::~Game()
 {
@@ -67,6 +72,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 
 	// Render components
+	paddle1.render(renderer);
 
 	// Present renderer buffer
 	SDL_RenderPresent(renderer);

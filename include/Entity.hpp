@@ -5,4 +5,7 @@ class Entity
 {
 protected: 
 	int x, y; 
+public:
+	Entity() = default;
+	Entity(int x, int y) : x(x), y(y) {};
 };
