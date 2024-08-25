@@ -3,8 +3,9 @@
 #include "Game.hpp" 
 #include "PaddleRenderer.hpp"
 
-Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
-	: backgroundColor({ 0,0,0,255 }), running(true), window(nullptr), renderer(nullptr)
+Game::Game() : backgroundColor({ 0,0,0,255 }), running(false), window(nullptr), renderer(nullptr) {}; 
+
+void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	int flags = 0;
 
@@ -13,31 +14,32 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+	// Initialise SDL Elements
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
-		std::cout << "GAME INITIALISED" << "\n";
-
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-		if (window)
-		{
-			std::cout << "Window Created" << "\n";
-		}
-
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if (renderer)
-		{
-			std::cout << "Renderer created" << "\n";
-		}
-
-		running = true;
-
-		sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
-		paddle1 = Paddle(640, 360, 20, 20, sharedPaddleRenderer);
+		std::cout << "SDL failed to initialise" << std::endl;
+		return; 
 	}
-	else
+
+	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+	if (!window)
 	{
-		running = false;
+		std::cout << "Window failed to create" << std::endl; 
+		return; 
 	}
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if (!renderer)
+	{
+		std::cout << "Renderer failed to create" << std::endl;
+		return; 
+	}
+
+	// Initialise entities	
+	sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
+	paddle1 = Paddle(640, 360, 20, 20, sharedPaddleRenderer);
+
+	running = true;
 };
 
 Game::~Game()

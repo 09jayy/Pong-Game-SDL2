@@ -13,7 +13,8 @@ int main(int argc, char* argv[])
     Uint32 elapsed = 0;
     int frameTime = 0;
 
-    Game game("Pong Game by Jay", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GAME_WIDTH, GAME_HEIGHT, false);
+    Game game;
+    game.init("Pong Game by Jay", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GAME_WIDTH, GAME_HEIGHT, false);
 
     while (game.isRunning()) 
     {
