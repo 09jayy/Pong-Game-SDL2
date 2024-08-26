@@ -40,6 +40,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	paddle1 = Paddle(0, 0, 20, 80);
 	paddle1.setRenderer(sharedPaddleRenderer);
 
+	paddle2 = Paddle(1280-20, 720-80, 20, 80);
+	paddle2.setRenderer(sharedPaddleRenderer);
+
 	running = true;
 };
 
@@ -76,6 +79,7 @@ void Game::render()
 
 	// Render components
 	paddle1.render(renderer);
+	paddle2.render(renderer); 
 
 	// Present renderer buffer
 	SDL_RenderPresent(renderer);

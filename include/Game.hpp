@@ -12,6 +12,7 @@ private:
 	SDL_Renderer* renderer;
 	const SDL_Color backgroundColor;
 	Paddle paddle1;
+	Paddle paddle2;
 	std::shared_ptr<IRectangleRenderer> sharedPaddleRenderer; 
 
 public:
