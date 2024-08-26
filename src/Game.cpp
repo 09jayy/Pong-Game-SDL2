@@ -2,6 +2,8 @@
 #include "SDL.h"
 #include "Game.hpp" 
 #include "PaddleRenderer.hpp"
+#include "BallRenderer.hpp"
+#include "Ball.hpp"
 
 Game::Game() : backgroundColor({ 0,0,0,255 }), running(false), window(nullptr), renderer(nullptr) {}; 
 
@@ -35,13 +37,19 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return; 
 	}
 
-	// Initialise entities	
+	/* Initialise entities */ 
+	
+	// Initialise Paddles
 	sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
 	paddle1 = Paddle(0, 0, 20, 80);
 	paddle1.setRenderer(sharedPaddleRenderer);
 
 	paddle2 = Paddle(1280-20, 720-80, 20, 80);
 	paddle2.setRenderer(sharedPaddleRenderer);
+
+	// Initialise ball
+	ball = Ball(640, 360, 10);
+	ball.setRenderer(std::make_unique<BallRenderer>()); 
 
 	running = true;
 };
@@ -80,6 +88,7 @@ void Game::render()
 	// Render components
 	paddle1.render(renderer);
 	paddle2.render(renderer); 
+	ball.render(renderer);
 
 	// Present renderer buffer
 	SDL_RenderPresent(renderer);
