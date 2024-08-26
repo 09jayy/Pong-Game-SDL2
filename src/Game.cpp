@@ -37,7 +37,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	// Initialise entities	
 	sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
-	paddle1 = Paddle(640, 360, 20, 20, sharedPaddleRenderer);
+	paddle1 = Paddle(0, 0, 20, 80);
+	paddle1.setRenderer(sharedPaddleRenderer);
 
 	running = true;
 };

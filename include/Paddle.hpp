@@ -13,7 +13,8 @@ private:
 	SDL_Color color; 
 public:	
 	Paddle() = default;
-	Paddle(int x, int y, int width, int height, std::shared_ptr<IRectangleRenderer> renderer);
+	Paddle(int x, int y, int width, int height);
 
+	void setRenderer(std::shared_ptr<IRectangleRenderer> renderer);
 	void render(SDL_Renderer* gameRenderer); 
 };
