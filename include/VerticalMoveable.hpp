@@ -8,6 +8,7 @@ private:
 	float xVar;
 public:
 	VerticalMoveable() = default;
+	~VerticalMoveable() = default; 
 
 	void adjustVelocity(float add);
 	void move(int& y); 

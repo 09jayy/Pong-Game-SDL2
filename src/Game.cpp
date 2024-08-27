@@ -4,6 +4,7 @@
 #include "PaddleRenderer.hpp"
 #include "BallRenderer.hpp"
 #include "Ball.hpp"
+#include "VerticalMoveable.hpp"
 
 Game::Game() : backgroundColor({ 0,0,0,255 }), running(false), window(nullptr), renderer(nullptr) {}; 
 
@@ -41,8 +42,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	
 	// Initialise Paddles
 	sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
-	paddle1 = Paddle(0, 0, 20, 80);
+	paddle1 = Paddle(150, 0, 20, 80);
 	paddle1.setRenderer(sharedPaddleRenderer);
+	paddle1.setController(std::make_unique<VerticalMoveable>()); 
 
 	paddle2 = Paddle(1280-20, 720-80, 20, 80);
 	paddle2.setRenderer(sharedPaddleRenderer);
@@ -61,12 +63,7 @@ Game::~Game()
 
 void Game::handleEvents()
 {
-
-}
-
-void Game::update()
-{
-	SDL_Event event; 
+	SDL_Event event;
 	SDL_PollEvent(&event);
 
 	switch (event.type)
@@ -75,18 +72,25 @@ void Game::update()
 			running = false;
 			break;
 		case SDL_KEYDOWN:
-			switch (event.key.keysym.scancode)
+			switch (event.key.keysym.sym)
 			{
+				case SDLK_w:
+					paddle1.addVelocity(-0.5);
+					break;
+				case SDLK_s:
+					paddle1.addVelocity(0.5);
+					break;
 				case SDL_SCANCODE_UP:
 					break;
 				case SDL_SCANCODE_DOWN:
 					break;
-				case SDL_SCANCODE_W:
-					break;
-				case SDL_SCANCODE_S:
-					break;
 			}
 	}
+}
+
+void Game::update()
+{
+	paddle1.move(); 
 }
 
 void Game::render()

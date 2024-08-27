@@ -6,7 +6,7 @@ Interface encapsulates movement functionality for entities that move based on us
 class IMoveableY
 {
 public:
-	virtual void adjustVelocity(int add) = 0;
+	virtual void adjustVelocity(float add) = 0;
 	virtual void move(int& y) = 0;
 	virtual ~IMoveableY() {};
 };
