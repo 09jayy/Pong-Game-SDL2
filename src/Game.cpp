@@ -73,7 +73,19 @@ void Game::update()
 	{
 		case SDL_QUIT:
 			running = false;
-			break; 
+			break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.scancode)
+			{
+				case SDL_SCANCODE_UP:
+					break;
+				case SDL_SCANCODE_DOWN:
+					break;
+				case SDL_SCANCODE_W:
+					break;
+				case SDL_SCANCODE_S:
+					break;
+			}
 	}
 }
 
