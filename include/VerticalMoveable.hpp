@@ -11,5 +11,6 @@ public:
 	~VerticalMoveable() = default; 
 
 	void adjustVelocity(float add);
+	void killVelocity();
 	void move(int& y); 
 };

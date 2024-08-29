@@ -21,6 +21,7 @@ public:
 	void setController(std::unique_ptr<IMoveableY> newController);
 	void addVelocity(float add); 
 	void move(); 
+	void killVelocity(); 
 
 	void setRenderer(std::shared_ptr<IRectangleRenderer> renderer);
 	void render(SDL_Renderer* gameRenderer); 

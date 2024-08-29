@@ -3,24 +3,26 @@
 
 void VerticalMoveable::adjustVelocity(float add)
 {
-	if (add > 0 && xVar < 0)
+	const float MIN_MAX_X = 2.0; 
+	if (add > 0)
 	{
-		xVar = 0;
+		xVar += add; 
+		xVar = std::min(xVar, MIN_MAX_X);
 	}
-	else if (add < 0 && xVar > 0)
+	else
 	{
-		xVar = 0; 
+		xVar += add;
+		xVar = std::min(xVar, MIN_MAX_X*-1);
 	}
-
-	const float MAX_X = 2.0;
-	xVar = (xVar + add >= MAX_X) ? MAX_X : xVar + add; 
-	xVar = (xVar + add <= MAX_X * -1) ? MAX_X * -1 : xVar + add; 
-
-	yVelocity = 2 * (xVar * xVar * xVar);
-
-	std::cout << "yVelocity: " << yVelocity << std::endl; 
-	std::cout << "xVar: " << xVar << std::endl; 
+	float xVarAbs = std::abs(xVar);
+	yVelocity = 2*pow(xVarAbs,3) * ((xVar < 0) ? -1 : 1);
 };
+
+void VerticalMoveable::killVelocity()
+{
+	yVelocity = 0; 
+	xVar = 0; 
+}
 
 void VerticalMoveable::move(int& y)
 {

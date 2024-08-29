@@ -13,6 +13,12 @@ void Paddle::setController(std::unique_ptr<IMoveableY> newController)
 void Paddle::addVelocity(float add)
 {
 	controller->adjustVelocity(add);
+	controller->move(y); 
+};
+
+void Paddle::killVelocity()
+{
+	controller->killVelocity(); 
 };
 
 void Paddle::move()
