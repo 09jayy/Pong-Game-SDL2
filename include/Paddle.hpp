@@ -3,19 +3,21 @@
 #include <memory>
 #include "SDL.h"
 #include "Entity.hpp"
-#include "IMoveableY.hpp"
 
 class Paddle : public Entity
 {
 private:
 	int width, height; 
+	SDL_Scancode upKey;
+	SDL_Scancode downKey;
 	SDL_Color color; 
 
 public:	
-	Paddle() = default;
-	Paddle(int x, int y, int width, int height);
+	Paddle() = default; 
+	Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SDL_Scancode downKey);
  
 	void move();  
+	void processInput(const Uint8* keyboardState);
 	
 	void render(SDL_Renderer* gameRenderer); 
 };

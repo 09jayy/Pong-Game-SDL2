@@ -2,7 +2,6 @@
 #include <iostream>
 #include <memory>
 #include "Entity.hpp"
-#include "ICircleRenderer.hpp"
 
 class Ball : public Entity
 {

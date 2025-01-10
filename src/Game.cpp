@@ -2,10 +2,10 @@
 #include<memory>
 #include "SDL.h"
 #include "Game.hpp" 
-#include "PaddleRenderer.hpp"
-#include "BallRenderer.hpp"
 #include "Ball.hpp"
-#include "VerticalMoveable.hpp"
+
+int Game::GAME_WIDTH = 1280; 
+int Game::GAME_HEIGHT = 720; 
 
 Game::Game() : backgroundColor({ 0,0,0,255 }), running(false), window(nullptr), renderer(nullptr) {}; 
 
@@ -42,18 +42,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	/* Initialise entities */ 
 	
 	// Initialise Paddles
-	sharedPaddleRenderer = std::make_shared<PaddleRenderer>();
-	paddle1 = Paddle(150, 0, 20, 80);
-	paddle1.setRenderer(sharedPaddleRenderer);
-	paddle1.setController(std::make_unique<VerticalMoveable>()); 
-
-	paddle2 = Paddle(1280-20-150, 720-80, 20, 80);
-	paddle2.setRenderer(sharedPaddleRenderer);
-	paddle2.setController(std::make_unique<VerticalMoveable>());
+	paddle1 = Paddle(150, 0, 20, 80, SDL_SCANCODE_W, SDL_SCANCODE_S);
+	paddle2 = Paddle(1280-20-150, 720-80, 20, 80, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN);
 
 	// Initialise ball
 	ball = Ball(640, 360, 10);
-	ball.setRenderer(std::make_unique<BallRenderer>()); 
 
 	running = true;
 };
@@ -77,33 +70,8 @@ void Game::handleEvents()
 
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 
-	// Paddle1 movement
-	if (state[SDL_SCANCODE_W])
-	{
-		paddle1.addVelocity(-0.5);
-	}
-	if (state[SDL_SCANCODE_S])
-	{
-		paddle1.addVelocity(0.5);
-	}
-	else
-	{
-		paddle1.killVelocity(); 
-	}
-
-	// Paddle2 movement
-	if (state[SDL_SCANCODE_UP])
-	{
-		paddle2.addVelocity(-0.5);
-	}
-	if (state[SDL_SCANCODE_DOWN])
-	{
-		paddle2.addVelocity(0.5);
-	}
-	else
-	{
-		paddle2.killVelocity(); 
-	}
+	paddle1.processInput(state);
+	paddle2.processInput(state); 
 }
 
 void Game::update()

@@ -12,6 +12,8 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	const SDL_Color backgroundColor;
+	static int GAME_WIDTH;
+	static int GAME_HEIGHT;
 
 	Paddle paddle1;
 	Paddle paddle2;
@@ -19,6 +21,7 @@ private:
 public:
 	Game();
 	~Game();
+	static int GET_HEIGHT() { return GAME_HEIGHT; };
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void handleEvents();
