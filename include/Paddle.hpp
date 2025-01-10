@@ -3,26 +3,21 @@
 #include <memory>
 #include "SDL.h"
 #include "Entity.hpp"
-#include "IRectangleRenderer.hpp"
-#include "IMoveableY.hpp"
 
 class Paddle : public Entity
 {
 private:
-	int width, height;
-	std::shared_ptr<IRectangleRenderer> renderer;
+	int width, height; 
+	SDL_Scancode upKey;
+	SDL_Scancode downKey;
 	SDL_Color color; 
 
-	std::unique_ptr<IMoveableY> controller;
 public:	
-	Paddle() = default;
-	Paddle(int x, int y, int width, int height);
-
-	void setController(std::unique_ptr<IMoveableY> newController);
-	void addVelocity(float add); 
-	void move(); 
-	void killVelocity(); 
-
-	void setRenderer(std::shared_ptr<IRectangleRenderer> renderer);
+	Paddle() = default; 
+	Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SDL_Scancode downKey);
+ 
+	void move();  
+	void processInput(const Uint8* keyboardState);
+	
 	void render(SDL_Renderer* gameRenderer); 
 };
