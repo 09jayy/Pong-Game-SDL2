@@ -16,7 +16,6 @@ public:
 	Paddle() = default; 
 	Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SDL_Scancode downKey);
  
-	void move();  
 	void processInput(const Uint8* keyboardState);
 	
 	void render(SDL_Renderer* gameRenderer); 

@@ -43,7 +43,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	
 	// Initialise Paddles
 	paddle1 = Paddle(150, 0, 20, 80, SDL_SCANCODE_W, SDL_SCANCODE_S);
-	paddle2 = Paddle(1280-20-150, 720-80, 20, 80, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN);
+	paddle2 = Paddle(GAME_WIDTH-20-150, 720-80, 20, 80, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN);
 
 	// Initialise ball
 	ball = Ball(640, 360, 10);

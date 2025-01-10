@@ -6,17 +6,8 @@ Paddle::Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SD
 	: Entity(xPos, yPos), width(width), height(height), color(SDL_Color({ 255,255,255,255 })), upKey(upKey), downKey(downKey)
 {};
 
-void Paddle::move()
-{
-};
-
 void Paddle::processInput(const Uint8* keyboardState)
 {
-	if (xPos == 150)
-	{
-		std::cout << yPos << std::endl;
-		std::cout << "height " << Game::GET_HEIGHT() - width << std::endl;
-	}
 	if (keyboardState[upKey])
 	{
 		yPos = (yPos - 10 >= 0) ? yPos - 10 : 0;
