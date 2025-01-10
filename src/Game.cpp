@@ -76,8 +76,6 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	paddle1.move(); 
-	paddle2.move(); 
 }
 
 void Game::render()
