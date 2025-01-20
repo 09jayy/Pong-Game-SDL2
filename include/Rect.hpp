@@ -1,5 +1,6 @@
 #pragma once
 
+/* Base class intended for classes requiring width and height properties */
 class Rect
 {
 protected:

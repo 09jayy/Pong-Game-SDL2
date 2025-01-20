@@ -1,8 +1,8 @@
 #include "Ball.hpp"
 #include "SDL.h"
 
-Ball::Ball() :Entity(), radius(0), color({ 255,255,255,255 }) {}; 
-Ball::Ball(int xPos, int yPos, int radius) : Entity(xPos, yPos), radius(radius), color({ 255,255,255,255 }) {};
+Ball::Ball() :Entity(), Circle(0), color({ 255,255,255,255 }) {}; 
+Ball::Ball(int xPos, int yPos, int radius) : Entity(xPos, yPos), Circle(radius), color({ 255,255,255,255 }) {};
 
 void Ball::render(SDL_Renderer* gameRenderer)
 {

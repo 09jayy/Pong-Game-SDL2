@@ -2,11 +2,11 @@
 #include <iostream>
 #include <memory>
 #include "Entity.hpp"
+#include "Circle.hpp"
 
-class Ball : public Entity
+class Ball : public Entity , public Circle
 {
 private:
-	int32_t radius; 
 	SDL_Color color; 
 
 public:
