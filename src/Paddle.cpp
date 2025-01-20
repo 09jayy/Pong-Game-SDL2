@@ -3,19 +3,20 @@
 #include "Game.hpp"
 
 Paddle::Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SDL_Scancode downKey)
-	: Entity(xPos, yPos), width(width), height(height), color(SDL_Color({ 255,255,255,255 })), upKey(upKey), downKey(downKey)
+	: Entity(xPos, yPos), Rect(width,height), color(SDL_Color({ 255,255,255,255 })), upKey(upKey), downKey(downKey)
 {};
 
 void Paddle::processInput(const Uint8* keyboardState)
 {
+	const int STEP_SIZE = 20; 
 	if (keyboardState[upKey])
 	{
-		yPos = (yPos - 10 >= 0) ? yPos - 10 : 0;
+		yPos = (yPos - STEP_SIZE >= 0) ? yPos - STEP_SIZE: 0;
 
 	}
 	if (keyboardState[downKey])
 	{
-		yPos = (yPos + 10 <= Game::GET_HEIGHT() - height) ? yPos + 10 : Game::GET_HEIGHT() - height;
+		yPos = (yPos + STEP_SIZE <= Game::GET_HEIGHT() - height) ? yPos + STEP_SIZE: Game::GET_HEIGHT() - height;
 	}
 }; 
 

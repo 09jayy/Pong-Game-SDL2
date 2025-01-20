@@ -3,11 +3,11 @@
 #include <memory>
 #include "SDL.h"
 #include "Entity.hpp"
+#include "Rect.hpp"
 
-class Paddle : public Entity
+class Paddle : public Entity , public Rect
 {
 private:
-	int width, height; 
 	SDL_Scancode upKey;
 	SDL_Scancode downKey;
 	SDL_Color color; 
