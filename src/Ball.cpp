@@ -1,8 +1,9 @@
 #include "Ball.hpp"
 #include "SDL.h"
+#include "CollisionManager.hpp"; 
 
-Ball::Ball() : Entity(), Circle(0), color({ 255,255,255,255 }), xVel(1.0f), yVel(0.0f) {}; 
-Ball::Ball(int xPos, int yPos, int radius) : Entity(xPos, yPos), Circle(radius), color({ 255,255,255,255 }), xVel(10.0f), yVel(0.0f) {};
+Ball::Ball() : Circle(0.0f, 0.0f, 0), color({ 255,255,255,255 }), xVel(0.0f), yVel(0.0f) {}; 
+Ball::Ball(int xPos, int yPos, int radius) : Circle(xPos,yPos,radius), color({ 255,255,255,255 }), xVel(10.0f), yVel(0.0f) {};
 
 void Ball::render(SDL_Renderer* gameRenderer)
 {
@@ -40,6 +41,11 @@ void Ball::render(SDL_Renderer* gameRenderer)
             error += (tx - diameter);
         }
     }
+}; 
+
+void Ball::checkPaddleCollision(Paddle& paddle)
+{
+    int a = CollisionManager::checkCollision(this, &paddle); 
 }; 
 
 void Ball::move()

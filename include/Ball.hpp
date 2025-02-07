@@ -3,8 +3,9 @@
 #include <memory>
 #include "Entity.hpp"
 #include "Circle.hpp"
+#include "Paddle.hpp"
 
-class Ball : public Entity , public Circle
+class Ball : public Circle
 {
 private:
 	SDL_Color color; 
@@ -16,4 +17,5 @@ public:
 
 	void render(SDL_Renderer* gameRenderer);
 	void move(); 
+	void checkPaddleCollision(Paddle& paddle); 
 };

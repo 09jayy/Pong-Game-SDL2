@@ -7,7 +7,7 @@ class Entity
 protected: 
 	float xPos, yPos; 
 public:
-	Entity() = default;
+	Entity() : xPos(0.0f), yPos(0.0f) {};
 	Entity(int x, int y) : xPos(x), yPos(y) {};
 	virtual void render(SDL_Renderer* renderer) = 0; 
 };

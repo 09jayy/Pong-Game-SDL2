@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 Paddle::Paddle(int xPos, int yPos, int width, int height, SDL_Scancode upKey, SDL_Scancode downKey)
-	: Entity(xPos, yPos), Rect(width,height), color(SDL_Color({ 255,255,255,255 })), upKey(upKey), downKey(downKey)
+	: Rect(xPos,yPos,width,height), color(SDL_Color({ 255,255,255,255 })), upKey(upKey), downKey(downKey)
 {};
 
 void Paddle::processInput(const Uint8* keyboardState)

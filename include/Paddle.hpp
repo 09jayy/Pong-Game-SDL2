@@ -5,7 +5,7 @@
 #include "Entity.hpp"
 #include "Rect.hpp"
 
-class Paddle : public Entity , public Rect
+class Paddle : public Rect
 {
 private:
 	SDL_Scancode upKey;
