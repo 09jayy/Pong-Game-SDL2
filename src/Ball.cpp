@@ -1,8 +1,8 @@
 #include "Ball.hpp"
 #include "SDL.h"
 
-Ball::Ball() :Entity(), Circle(0), color({ 255,255,255,255 }) {}; 
-Ball::Ball(int xPos, int yPos, int radius) : Entity(xPos, yPos), Circle(radius), color({ 255,255,255,255 }) {};
+Ball::Ball() : Entity(), Circle(0), color({ 255,255,255,255 }), xVel(1.0f), yVel(0.0f) {}; 
+Ball::Ball(int xPos, int yPos, int radius) : Entity(xPos, yPos), Circle(radius), color({ 255,255,255,255 }), xVel(10.0f), yVel(0.0f) {};
 
 void Ball::render(SDL_Renderer* gameRenderer)
 {
@@ -40,4 +40,12 @@ void Ball::render(SDL_Renderer* gameRenderer)
             error += (tx - diameter);
         }
     }
+}; 
+
+void Ball::move()
+{
+    std::cout << xPos << ',' << yPos << std::endl; 
+    std::cout << "vel: " << xVel << ',' << yVel << std::endl; 
+    xPos = xPos + xVel;
+    yPos = yPos + yVel; 
 }; 

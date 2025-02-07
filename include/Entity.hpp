@@ -5,7 +5,7 @@
 class Entity
 {
 protected: 
-	int xPos, yPos; 
+	float xPos, yPos; 
 public:
 	Entity() = default;
 	Entity(int x, int y) : xPos(x), yPos(y) {};

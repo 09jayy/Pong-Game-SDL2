@@ -76,6 +76,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	ball.move(); 
 }
 
 void Game::render()
