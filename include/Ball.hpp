@@ -17,5 +17,5 @@ public:
 
 	void render(SDL_Renderer* gameRenderer);
 	void move(); 
-	void checkPaddleCollision(Paddle& paddle); 
+	void checkRectCollision(Rect& rect); 
 };

@@ -7,20 +7,20 @@ int CollisionManager::checkCollision(Circle* circle, Rect* rect)
 	// 1. Find the closest edge the circle is to the rect to be used for testing
 	float testX = circle->radius; 
 	float testY = circle->yPos; 
-	if (circle->xPos < rect->xPos)
+	if (circle->xPos < rect->xPos) // left edge
 	{
 		testX = rect->xPos;
 	}
-	else if (circle->xPos > rect->xPos + rect->width)
+	else if (circle->xPos > rect->xPos + rect->width) // right edge
 	{
 		testX = rect->xPos + rect->width; 
 	}; 
 
-	if (circle->yPos < rect->yPos)
+	if (circle->yPos < rect->yPos) // top edge 
 	{
 		testY = rect->yPos;
 	}
-	else if (circle->yPos > rect->yPos + rect->height)
+	else if (circle->yPos > rect->yPos + rect->height) // bottom edge 
 	{
 		testY = rect->yPos + rect->height;
 	}; 
@@ -30,8 +30,8 @@ int CollisionManager::checkCollision(Circle* circle, Rect* rect)
 	float distY = circle->yPos - testY;
 	float distance = std::sqrt((distX * distX) + (distY * distY)); 
 
-	// 3. Compare distance to circle radius
-	return (distance <= circle->radius) ? distY : -1; 
+	// 3. Compare distance to circle radius, return distance from top edge
+	return (distance <= circle->radius) ? circle->yPos - rect->yPos: -1;  
 };
 
 int CollisionManager::checkBorderCollision(Circle* circle)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <cmath>
 #include "Ball.hpp"
 #include "SDL.h"
 #include "CollisionManager.hpp"; 
@@ -43,9 +45,19 @@ void Ball::render(SDL_Renderer* gameRenderer)
     }
 }; 
 
-void Ball::checkPaddleCollision(Paddle& paddle)
+/*
+* Calculates new x and y velocities upon collision with paddle object
+* 
+* @param rect: object to check collision with
+*/
+void Ball::checkRectCollision(Rect& rect)
 {
-    int a = CollisionManager::checkCollision(this, &paddle); 
+    float collide = CollisionManager::checkCollision(this, &rect); 
+    if (collide != -1)
+    {
+        xVel = xVel * -1; 
+        yVel = yVel * -1 + (10*-0.00064f * pow(collide-40,2) + 1); 
+    };
 }; 
 
 void Ball::move()

@@ -4,7 +4,7 @@
 /* Base call for all entities that will be rendered to the screen */
 class Entity
 {
-protected: 
+public: 
 	float xPos, yPos; 
 public:
 	Entity() : xPos(0.0f), yPos(0.0f) {};

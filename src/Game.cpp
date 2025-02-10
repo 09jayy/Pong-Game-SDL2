@@ -76,8 +76,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	ball.checkPaddleCollision(paddle1); 
-	ball.checkPaddleCollision(paddle2);
+	ball.checkRectCollision(paddle1);
+	ball.checkRectCollision(paddle2);
 	ball.move(); 
 }
 
