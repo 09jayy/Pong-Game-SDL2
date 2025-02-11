@@ -46,7 +46,7 @@ void Ball::render(SDL_Renderer* gameRenderer)
 }; 
 
 /*
-* Calculates new x and y velocities upon collision with paddle object
+* Calculates new x and y velocities upon collision with rect object
 * 
 * @param rect: object to check collision with
 */
@@ -58,6 +58,15 @@ void Ball::checkRectCollision(Rect& rect)
         xVel = xVel * -1; 
         yVel = yVel * -1 + (10*-0.00064f * pow(collide-40,2) + 1); 
     };
+}; 
+
+void Ball::checkBorderCollision()
+{
+    bool collide = CollisionManager::checkBorderCollision(this); 
+    if (collide)
+    {
+        std::cout << "Collide with Border" << std::endl;
+    }; 
 }; 
 
 void Ball::move()

@@ -1,6 +1,6 @@
-#include "CollisionManager.hpp"
 #include <cmath>
-#include <array>
+#include "CollisionManager.hpp"
+#include "Game.hpp"
 
 int CollisionManager::checkCollision(Circle* circle, Rect* rect)
 {
@@ -34,7 +34,23 @@ int CollisionManager::checkCollision(Circle* circle, Rect* rect)
 	return (distance <= circle->radius) ? circle->yPos - rect->yPos: -1;  
 };
 
-int CollisionManager::checkBorderCollision(Circle* circle)
+Border CollisionManager::checkBorderCollision(Circle* circle)
 {
-	return 0; 
+	if (circle->xPos - circle->radius <= 0) // left border collision
+	{
+		return LEFT; 
+	}
+	else if (circle->xPos + circle->radius >= Game::GET_WIDTH()) // right border collision
+	{ 
+		return RIGHT; 
+	}
+	else if (circle->yPos - circle->radius <= 0) // top border collision
+	{
+		return TOP; 
+	}
+	else if (circle->yPos + circle->radius >= Game::GET_HEIGHT()) // bottom border collision
+	{
+		return BOTTOM; 
+	}
+	return NONE; 
 }

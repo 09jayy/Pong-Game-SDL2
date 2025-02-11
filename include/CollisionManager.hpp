@@ -8,9 +8,18 @@
 class Rect; 
 class Circle; 
 
+enum Border
+{
+	NONE,
+	LEFT,
+	RIGHT,
+	TOP,
+	BOTTOM,
+};
+
 class CollisionManager
 {
 public:
 	static int checkCollision(Circle* circle, Rect* rect); 
-	static int checkBorderCollision(Circle* circle); 
+	static Border checkBorderCollision(Circle* circle); 
 };

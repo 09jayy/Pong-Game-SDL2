@@ -18,4 +18,5 @@ public:
 	void render(SDL_Renderer* gameRenderer);
 	void move(); 
 	void checkRectCollision(Rect& rect); 
+	void checkBorderCollision(); 
 };

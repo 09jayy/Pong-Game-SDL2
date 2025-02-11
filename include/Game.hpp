@@ -22,6 +22,7 @@ public:
 	Game();
 	~Game();
 	static int GET_HEIGHT() { return GAME_HEIGHT; };
+	static int GET_WIDTH() { return GAME_WIDTH; }; 
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void handleEvents();
