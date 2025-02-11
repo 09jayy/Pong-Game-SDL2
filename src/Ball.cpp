@@ -63,9 +63,22 @@ void Ball::checkRectCollision(Rect& rect)
 void Ball::checkBorderCollision()
 {
     bool collide = CollisionManager::checkBorderCollision(this); 
-    if (collide)
+    if (collide != NONE)
     {
-        std::cout << "Collide with Border" << std::endl;
+        std::cout << "\n\nborder collision" << std::endl; 
+        // Check for collision with left and right borders
+        if (collide == LEFT || collide == RIGHT)
+        {
+            xVel *= -0.95f;  // Reverse and apply damping factor for smoother bounce
+            yVel += (rand() % 3 - 1) * 0.5f;  // Add slight random variation in vertical velocity
+        }
+
+        // Check for collision with top and bottom borders
+        if (collide == BOTTOM || collide == TOP)
+        {
+            yVel *= -1.05f;  // Reverse and amplify for a higher bounce effect
+            xVel += (rand() % 3 - 1) * 0.3f;  // Add slight random variation in horizontal velocity
+        }
     }; 
 }; 
 

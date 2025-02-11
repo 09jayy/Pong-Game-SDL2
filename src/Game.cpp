@@ -78,6 +78,7 @@ void Game::update()
 {
 	ball.checkRectCollision(paddle1);
 	ball.checkRectCollision(paddle2);
+	ball.checkBorderCollision(); 
 	ball.move(); 
 }
 
