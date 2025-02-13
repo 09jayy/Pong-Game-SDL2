@@ -15,7 +15,7 @@ git clone https://github.com/09jayy/Pong-Game-SDL2
 cd Pong-Game-SDL2
 ```
 
-Note: The CMakeLists.txt will first use `find_package()` to locate dependencies (SDL2, SDL_ttf)before attempting to download the respective repository from github
+Note: The CMakeLists.txt will first use `find_package()` to locate dependencies (SDL2, SDL_ttf) before attempting to download the respective repository from github
 
 > If you are not using a package manager or run into errors in configuration try add cmake flag `-DSDL2TTF_VENDORED=ON` into `cmake` configure command
 
@@ -27,42 +27,36 @@ Note: The CMakeLists.txt will first use `find_package()` to locate dependencies 
 1. Build Project (Ctrl+Shift+B / Cmd+Shift+B)
 1. Run Pong-Game-SDL.exe (Shift+F5)
 
-## Ninja Generator
+## Build & Compile
 
-### Debug
+### 1. Use CMake to Generate Build System
 
 ```sh
-mkdir build
-cd build
-cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Debug
-ninja
+mkdir build    # 1. Create build directory
+cd build       # 2. Change working directory to new build directory
+cmake ..       # 3. Run CMake configuration
 ```
 
-### Release
+Optional Flags for CMake configuration include:
+
+- `-G <build-system-name>` to build using spesific build system like ninja or msbuild
+- `DCCMAKE_BUILD_TYPE=Debug | DCCMAKE_BUILD_TYPE=Release` to build for Debug or Release
+- `-DSDL2TTF_VENDORED=ON` If not using a package manager or run into errors in config
+
+### 2. Use Build System to Compile to executable file
+
+From within the build directory, run your appropriate build command for your choosen build system. Examples include:
 
 ```sh
-mkdir build
-cd build
-cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
-ninja
+ninja                           # For Ninja build system
+msbuild Pong-Game-SDL2.sln      # For Msbuild System
 ```
 
-## Visual Studio 17 Generator
+### 3. Run Executable
 
-### Debug
-
-```sh
-mkdir build
-cd build
-cmake .. -G "Visual Studio 17" -DCMAKE_BUILD_TYPE=Debug
-msbuild Pong-Game-SDL2.sln
-```
-
-### Release
+Locate the generated executable file and run, located in the src folder or Debug/Release folder within the src folder.
 
 ```sh
-mkdir build
-cd build
-cmake .. -G "Visual Studio 17" -DCMAKE_BUILD_TYPE=Release
-msbuild Pong-Game-SDL2.sln
+Pong-Game-SDL2.exe     # For Windows
+./Pong-Game-SDL2.out   # For Mac
 ```

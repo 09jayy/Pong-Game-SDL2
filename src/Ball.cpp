@@ -65,7 +65,6 @@ void Ball::checkBorderCollision()
     bool collide = CollisionManager::checkBorderCollision(this); 
     if (collide != NONE)
     {
-        std::cout << "\n\nborder collision" << std::endl; 
         // Check for collision with left and right borders
         if (collide == LEFT || collide == RIGHT)
         {
