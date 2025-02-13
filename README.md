@@ -38,7 +38,7 @@ cmake .. <optional-config-flags>     # 3. Run CMake configuration
 Optional flags for CMake configuration include:
 
 - `-G <build-system-name>` to build using spesific build system like ninja or msbuild
-- `DCCMAKE_BUILD_TYPE=Debug | DCCMAKE_BUILD_TYPE=Release` to build for Debug or Release
+- ` -DCCMAKE_BUILD_TYPE=Debug | -DCCMAKE_BUILD_TYPE=Release` to build for Debug or Release
 - `-DSDL2TTF_VENDORED=ON` If not using a package manager or run into errors in config
 
 ### 2. Use Build System to Compile to executable file
