@@ -17,8 +17,6 @@ cd Pong-Game-SDL2
 
 Note: The CMakeLists.txt will first use `find_package()` to locate dependencies (SDL2, SDL_ttf) before attempting to download the respective repository from github
 
-> If you are not using a package manager or run into errors in configuration try add cmake flag `-DSDL2TTF_VENDORED=ON` into `cmake` configure command
-
 ## Open in Visual Studio as CMake Project (Recommended)
 
 1. In Visual Studio: File > Open > CMake.. > "Pong-Game-SDL2/CMakeLists.txt"
@@ -32,12 +30,12 @@ Note: The CMakeLists.txt will first use `find_package()` to locate dependencies 
 ### 1. Use CMake to Generate Build System
 
 ```sh
-mkdir build    # 1. Create build directory
-cd build       # 2. Change working directory to new build directory
-cmake ..       # 3. Run CMake configuration
+mkdir build                          # 1. Create build directory
+cd build                             # 2. Change working directory to new build directory
+cmake .. <optional-config-flags>     # 3. Run CMake configuration
 ```
 
-Optional Flags for CMake configuration include:
+Optional flags for CMake configuration include:
 
 - `-G <build-system-name>` to build using spesific build system like ninja or msbuild
 - `DCCMAKE_BUILD_TYPE=Debug | DCCMAKE_BUILD_TYPE=Release` to build for Debug or Release
